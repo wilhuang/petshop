@@ -11,13 +11,8 @@ type DelUserController struct {
 
 func (this *DelUserController) Get() {
 	this.Verify(this.Admin())
-	this.TplName = "delUser.tpl"
-}
-
-func (this *DelUserController) Post() {
-	this.Verify(this.Admin())
-	username := this.GetString("username")
-	err := models.UnRegister(username)
+	uid := this.Ctx.Input.Param(":id")
+	err := models.UnRegisterById(uid)
 	if err != nil {
 		this.TplName = "error.tpl"
 		return

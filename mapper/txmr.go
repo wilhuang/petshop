@@ -8,8 +8,8 @@ import (
 
 // GetTx to link to mysql return a tx obj
 func GetTx() (*sql.Tx, error) {
-	// TODO. read configuration in accountsvc
-	db, err := sql.Open("mysql", "root:Qq010615@tcp(127.0.0.1:3306)/accounts?charset=utf8")
+	// TODO. read configuration in petshop
+	db, err := sql.Open("mysql", "root:Qq094130@tcp(127.0.0.1:3306)/petshop?charset=utf8")
 	if err != nil {
 		return nil, err
 	}

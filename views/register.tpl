@@ -10,7 +10,7 @@
 		<link rel="stylesheet" href="../static/css/regedit.css" />
 		<link rel="stylesheet" href="../static/css/sui.css" />
 		<script type="text/javascript" src="../static/js/sui.js"></script>
-		<title></title>
+		<title>宠物网</title>
 		<style>
 			/*.bottomLine {
 				border-bottom: 1px solid #ccc;
@@ -60,7 +60,7 @@
 			<div class="logo"> <img src="../static/img/logo.png" /> </div>
 		</div>
 		<div class="am-g">
-			<div  style="width: 999px;margin: 0 auto;font-size: 14px;"> <span style="float: right;color: #333333;">我已注册，马上<span style="color: #F88600;"><a href="/">登录</a></span></span>
+			<div  style="width: 999px;margin: 0 auto;font-size: 14px;"> <span style="float: right;color: #333333;">我已注册，马上<span style="color: #F88600;"><a href="/login">登录</a></span></span>
 			</div>
 		</div>
 		<div class="am-g content" style="margin-top: 12px;">
@@ -81,7 +81,7 @@
 							<div class="am-u-sm-1 am-u-end" style="padding: 10px;"> <span class="right" style="display: none;"></span> </div>
 						</div>
 						<div class="am-g" style="margin-top: 16px;">
-							<div class="am-u-sm-7 am-u-sm-offset-3 "> <span class="left1"></span> <input type="text" name="email" placeholder="请输入您的邮箱" class="am-form-field" style="margin: auto;display: block;float: left;padding-left: 55px;width: 528px" /> </div>
+							<div class="am-u-sm-7 am-u-sm-offset-3 "> <span class="left1"></span> <input type="email" name="email" placeholder="请输入您的邮箱" class="am-form-field" style="margin: auto;display: block;float: left;padding-left: 55px;width: 528px" /> </div>
 							<div class="am-u-sm-1 am-u-end" style="padding: 10px;"> <span class="right" style="display: none;"></span> </div>
 						</div>
 						<div class="am-g" style="margin-top: 16px;">
@@ -90,12 +90,10 @@
 						</div>
 						<div class="am-g" style="margin-top: 16px;">
 							<div class="am-u-sm-4 am-u-sm-offset-3" style="padding-right: 0rem;"> <span class="left2"></span> <input type="text" placeholder="请输入校验码" class="am-form-field" style="margin: auto;display: block;float: left;padding-left: 55px;width: 360px" /> </div>
-							<div class="am-u-sm-3 am-u-end" style="padding-left: 0rem;"> <input name="button" type="image" style="width: 190px;float: left;height: 62px;" value="ee" src="../static/img/uwv6.png" /></div>
+							<div class="am-u-sm-3 am-u-end" style="padding-left: 0rem;"> <input type="image" style="width: 190px;float: left;height: 62px;" value="ee" src="../static/img/uwv6.png" /></div>
 						</div>
 						<div class="am-g" style="margin-top: 21px;">
-							<form class="sui-form">
-								<div class="am-u-sm-7 am-u-sm-offset-3" style="padding-right: 0rem;"> <label class="checkbox-pretty inline checked"> <input type="checkbox" checked="checked"><span style="font-size: 12px;color: #878787;">同意<a>《宠物网会员章程》</a> <a>《支付宝协议》</a> 及 <a>《宠物网商业联盟在线协议》</a></span> </label> </div>
-							</form>
+								<div class="am-u-sm-7 am-u-sm-offset-3" style="padding-right: 0rem;"><input type="checkbox" checked="checked"><span style="font-size: 12px;color: #878787;">  同意<a>《宠物网会员章程》</a> <a>《支付宝协议》</a> 及 <a>《宠物网商业联盟在线协议》</a></span></div>
 						</div>
 						<div class="am-g" style="margin-top:70px;">
 							<div class="am-u-sm-7 am-u-sm-offset-3 "> <button type="submit" class="am-btn am-btn-warning" style="width: 528px;padding: 20px;border: 1px rgba(187, 187, 187, 0.5) solid;"><font style="font-size: 20px;font-weight: bold;">同意协议并注册</font></button> </div>
@@ -103,11 +101,11 @@
 					</form> 
 				</div>
 				<div class="am-g" style="margin-top: 20px;margin-bottom: 135px;">
-					<div class="am-u-sm-7 am-u-sm-offset-3" style="padding-right: 0rem;"> <a style="font-size: 14px;" href="/building">您也可以使用手机号注册></a> </div>
+					<div class="am-u-sm-7 am-u-sm-offset-3" style="padding-right: 0rem;"> <a style="font-size: 14px;" href="#">您也可以使用手机号注册></a> </div>
 				</div>
-
 			</div>
 		</div>
+		  {{if .Finish}}{{ if .UserName }}<script>alert('用户{{.UserName}}注册成功');</script>{{ else }}<script>alert('注册失败请重试');</script>{{ end }}{{else}}{{end}}
 			<div class="am-g " style="margin-top: 40px;text-align: center;font-size: 12px;">
 			<div class="bottomLine" style="margin:0 auto;width:700px;height: 35px;">
 			<span style="float: left;word-spacing:0.52rem;    text-align: center;    width: 100%;">关于我们 | 联系我们 | 商家入驻 | 友情链接 | 站点地图 | 宠物商城 | 销售联盟 | 商城社区 | 企业文化 | 帮助中心 

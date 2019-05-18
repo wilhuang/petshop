@@ -6,14 +6,19 @@ import (
 
 type Role int
 
+// //equal Role.Visitor()=0
+// func (r *Role) Visitor() int {
+// 	return 0
+// }
+
 //equal Role.User()=1
 func (r *Role) User() int {
-	return 1
+	return 0
 }
 
 //equal Role.Admin()=2
 func (r *Role) Admin() int {
-	return 2
+	return 1
 }
 
 type BaseController struct {
@@ -25,7 +30,7 @@ func (this *BaseController) Verify(powerAccessPage int) {
 	role, _ := this.GetSession("Role").(int)
 	username := this.GetSession("UserName")
 	if username == nil || role+1 < powerAccessPage {
-		this.Redirect("/", 401)
+		this.Redirect("/role", 302)
 		return
 	}
 }

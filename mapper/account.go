@@ -3,6 +3,8 @@ package mapper
 import (
 	"database/sql"
 	"fmt"
+
+	"github.com/astaxie/beego"
 )
 
 /***************************************************************************
@@ -12,7 +14,7 @@ SQL:
 	--
 	-- Definition for table account
 	--
-USE accounts;
+USE pstshop;
 
     CREATE TABLE account (
 	  uid VARCHAR(36) NOT NULL,
@@ -26,7 +28,8 @@ USE accounts;
 	AVG_ROW_LENGTH = 16384
 	CHARACTER SET utf8
 	COLLATE utf8_general_ci;
-
+    ALTER TABLE account
+      ADD UNIQUE INDEX uid(uid);
 INSERT INTO account VALUES
 ('001', 'Test1','1', 'Test1@qq.com', '123456'),
 ('002', 'Test2','0', 'Test2@qq.com', '123456'),
@@ -62,14 +65,18 @@ func (m *AccountMapper) fields(row *AccountRow) []interface{} {
 }
 
 func (m *AccountMapper) CreateAccount(uid, username, role, email, password string) (*AccountRow, error) {
-	sqlInsert := fmt.Sprintf(`INSERT INTO %s(%s) VALUES (%s, ?);`,
+	sqlInsert := fmt.Sprintf(`INSERT INTO %s(%s) VALUES (%s);`,
 		m.Metadata.TableName(),
 		m.Metadata.ColumnsString(),
 		m.Metadata.QuestionMarkString())
 	res, err := m.Tx.Exec(sqlInsert, uid, username, role, email, password)
+	beego.Info(sqlInsert)
+	beego.Info(uid, username, role, email, password)
+	beego.Info(res)
 	if err != nil {
 		return nil, err
 	}
+	beego.Info(err)
 	if num, err := res.RowsAffected(); err != nil || num != 1 {
 		return nil, fmt.Errorf("RowsAffected: %d, %s", num, err.Error())
 	}
@@ -83,12 +90,38 @@ func (m *AccountMapper) CreateAccount(uid, username, role, email, password strin
 }
 
 func (m *AccountMapper) ResetAccount(username, key, value string) error {
-	sqlInsert := fmt.Sprintf(`Update %s SET %s=? VALUES username=?;`, m.Metadata.TableName(), key)
+	sqlInsert := fmt.Sprintf(`Update %s SET %s=? WHERE username=?;`, m.Metadata.TableName(), key)
 	res, err := m.Tx.Exec(sqlInsert, value, username)
 	if err != nil {
 		return err
 	}
 	if num, err := res.RowsAffected(); err != nil || num != 1 {
+		return fmt.Errorf("RowsAffected: %d, %s", num, err.Error())
+	}
+	return nil
+}
+
+func (m *AccountMapper) ResetUserInfo(uid, username, password, email string) error {
+	sqlInsert := fmt.Sprintf(`Update %s SET username=?,password=?,email=? WHERE uid=?;`, m.Metadata.TableName())
+	res, err := m.Tx.Exec(sqlInsert, username, password, email, uid)
+	if err != nil {
+		beego.Info(err)
+		return err
+	}
+	if num, err := res.RowsAffected(); err != nil {
+		return fmt.Errorf("RowsAffected: %d, %s", num, err.Error())
+	}
+	return nil
+}
+
+func (m *AccountMapper) UpdateUserInfo(uid, username, email string) error {
+	sqlInsert := fmt.Sprintf(`Update %s SET username=?,email=? WHERE uid=?;`, m.Metadata.TableName())
+	res, err := m.Tx.Exec(sqlInsert, username, email, uid)
+	if err != nil {
+		beego.Info(err)
+		return err
+	}
+	if num, err := res.RowsAffected(); err != nil {
 		return fmt.Errorf("RowsAffected: %d, %s", num, err.Error())
 	}
 	return nil
@@ -128,6 +161,22 @@ func (m *AccountMapper) CheckLoginInfo(username, password string) error {
 func (m *AccountMapper) DeleteAccountByUserName(username string) error {
 	sqlSelect := fmt.Sprintf(`DELETE FROM %s WHERE username = ?`, m.Metadata.TableName())
 	res, err := m.Tx.Exec(sqlSelect, username)
+	if err != nil {
+		return err
+	}
+	num, err := res.RowsAffected()
+	if err != nil {
+		return err
+	}
+	if num != 1 {
+		return fmt.Errorf("AffectedRows:%d, now rows found", num)
+	}
+	return nil
+}
+
+func (m *AccountMapper) DeleteAccountById(uid string) error {
+	sqlSelect := fmt.Sprintf(`DELETE FROM %s WHERE uid = ?`, m.Metadata.TableName())
+	res, err := m.Tx.Exec(sqlSelect, uid)
 	if err != nil {
 		return err
 	}
@@ -216,6 +265,5 @@ func NewAccountMapper(tx *sql.Tx) *AccountMapper {
 			},
 		},
 	}
-
 	return mapper
 }

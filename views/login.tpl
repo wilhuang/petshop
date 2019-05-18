@@ -11,7 +11,7 @@
 		<link rel="stylesheet" href="../static/css/mui.min.css" />
 		<script type="text/javascript" src="../static/js/mui.min.js" ></script>
 		<script type="text/javascript" src="../static/js/login.js" ></script>
-		<title></title>
+		<title>宠物网</title>
 		<style>
 			.bottomLine{
 				border-bottom: 1px solid #ccc;
@@ -43,11 +43,11 @@
 					<div class="am-u-sm-12" style="padding-right: 0rem">
 						<img src="../static/img/erweima.png" style="float: right;height: 58px;" id="loginimg"/ >						
 					</div>
-					<div class="am-u-sm-12" style="padding-left: 30px;padding-right: 30px;">
-					<h4 style="font-weight: normal;">欢迎登录</h4>
-				 	<span class="left1"></span>	<input type="text" class="am-form-field"  name="username" placeholder="邮箱/手机号/用户名" style="padding-left: 50px;margin-top: 48px;font-size: 12px;"/>
-				    </div>	
-					<form action="/" method="post">
+					<form action="/login" method="post">
+					    <div class="am-u-sm-12" style="padding-left: 30px;padding-right: 30px;">
+					    <h4 style="font-weight: normal;">欢迎登录</h4>
+				 	    <span class="left1"></span>	<input type="text" class="am-form-field"  name="username" placeholder="邮箱/手机号/用户名" style="padding-left: 50px;margin-top: 48px;font-size: 12px;"/>
+				        </div>	
 				        <div class="am-u-sm-12" style="margin-top: 21px;padding-left: 30px;padding-right: 30px;">
 				            <span class="left2"></span>	  <input type="password" class="am-form-field"  name="password" placeholder="请输入密码"style="padding-left: 50px;font-size: 12px;"/>
 				        </div>	

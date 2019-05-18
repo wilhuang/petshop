@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <title>error</title>
+        <title>出现错误</title>
         <link href="../static/css/404.css" rel="stylesheet" type="text/css" />
         <script src="../static/js/jquery-1.7.2.min.js"></script>
         <script type="text/javascript">
@@ -50,8 +50,8 @@
             <div class="tipInfo">
                 <div class="in">
                     <div class="textThis">
-                        <h2>验证码错误</h2>
-                        <p><span>页面自动<a id="href" href="/">跳转</a></span><span>等待<b id="wait">6</b>秒</span></p>
+                        <h2>错误</h2>
+                        <p><span>页面自动<a id="href" href="/login">跳转</a></span><span>等待<b id="wait">6</b>秒</span></p>
                         <script type="text/javascript">                            (function() {
                                 var wait = document.getElementById('wait'), href = document.getElementById('href').href;
                                 var interval = setInterval(function() {

@@ -9,6 +9,6 @@ type UserController struct {
 func (this *UserController) Get() {
 	this.Verify(this.User())
 	this.SsionToTpl()
-	this.TplName = "index.tpl"
+	this.TplName = "user.tpl"
 	return
 }
